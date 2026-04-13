@@ -1,16 +1,60 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:fragment="head (titulo)">
-    <meta charset="UTF-8"/>
-    <title th:text="${titulo}"></title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-</head>
+    <head th:fragment="head (titulo)">
+        <meta charset="UTF-8"/>
+        <title th:text="${titulo}"></title>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    </head>
+    <body>
+        <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/about}">ToDoList</a>
 
-<div th:fragment="javascript">
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/popper.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-</div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="nav-link" th:href="@{/tareas}">Tareas</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item" sec:authorize="!isAuthenticated()">
+                            <a class="nav-link" th:href="@{/login}">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="!isAuthenticated()">
+                            <a class="nav-link" th:href="@{/registro}">Registro</a>
+                        </li>
+
+                        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                <span sec:authentication="name">Usuario</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" th:href="@{/cuenta}">Cuenta</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            Cerrar sesión (<span sec:authentication="name"></span>)
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div th:fragment="javascript">
+            <script th:src="@{/js/jquery.min.js}"></script>
+            <script th:src="@{/js/popper.min.js}"></script>
+            <script th:src="@{/js/bootstrap.min.js}"></script>
+        </div>
+    </body>
 </html>
