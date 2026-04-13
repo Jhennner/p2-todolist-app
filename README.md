@@ -1,29 +1,32 @@
 # To Do List app
 
-ToDoList app usign Spring Boot and Thymeleaf templates.
-
-## Requirements
-
-You need install on your system:
-
-- Java 8 SDK
-
+Aplicación «ToDoList» que utiliza Spring Boot y plantillas Thymeleaf. Se basa en 
+presentar una lista de tareas pendientes de un usuario.
+## Requisitos
+Tenes que instalado en tu sistema:
+- Java 8 SDK o superior.
 ## Ejecución
-
-You can run the app using the goal `run` from Maven's _plugin_ 
-on Spring Boot:
-
+Puedes ejecutar la aplicación utilizando el objetivo `run` del _plugin_ de Maven
+para Spring Boot:
 ```
 $ ./mvn spring-boot:run 
-```   
-
-You can already create a `jar` file and run it:
-
+// o solo..
+$ mvn spring-boot:run
 ```
-$ ./mvn package
-$ java -jar target/todolist-inicial-0.0.1-SNAPSHOT.jar 
+Ya puedes crear un archivo `jar` y ejecutarlo:
 ```
-
-Once the app is running, you can open your favourite browser and connect to:
-
+$ ./mvn clean package 
+$  mvn clean package
+```
+Una vez que la aplicación esté en funcionamiento, puedes abrirlo en tu navegador favorito y conectarte:
 - [http://localhost:8080/login](http://localhost:8080/login)
+
+## Desarrollo
+### Pagina About.
+
+Para la creación de la página about se han creado lo siquiente:
+
+- `./controller/HomeControler`: Una nueva clase clase llamada `HomeController` que accediendo al enlace [http://localhost:8080/about](http://localhost:8080/about)
+devuelve una vista llamada `about.html` (`./resources/templates/about.html`)
+- `./test.../controller/AboutTestPage` : Test que asegura que cuando un usuario accede a la URL `/about` de la aplicación, 
+el controlador encargado responde con éxito y el contenido de la página menciona el nombre del proyecto, "ToDoList". 
