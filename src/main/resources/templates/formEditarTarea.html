@@ -3,6 +3,7 @@
 
     <head th:replace="fragments :: head (titulo='Editar Tarea')"></head>
     <body>
+        <nav th:replace="~{fragments::menu(${usuario})}"></nav>
         <div class="container-fluid">
 
             <h2 th:text="'Modificación de la tarea ' + ${tarea.getId()}"></h2>
@@ -19,6 +20,6 @@
             </form>
         </div>
 
-        <div th:replace="fragments::javascript"/>
+        <div th:replace="~{fragments::javascript}"></div>
     </body>
 </html>
