@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments :: head (titulo='Gestión de Usuarios')"></head>
+    <body>
+
+        <nav th:replace="~{fragments::menu(${usuario})}"></nav>
+        <div class="container-fluid">
+
+            <div class="row mt-3">
+                <div class="col">
+                    <h2>Listado de Usuarios Registrados</h2>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${!#strings.isEmpty(mensaje)}">
+                        <span th:text="${mensaje}"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="usuarioItem: ${usuarios}">
+                            <td th:text="${usuarioItem.id}"></td>
+                            <td th:text="${usuarioItem.email}"></td>
+                            <td th:text="${usuarioItem.nombre}"></td>
+                            <td>
+                                <span th:if="${usuarioItem.activo}" class="badge badge-success">Activo</span>
+                                <span th:if="not ${usuarioItem.activo}" class="badge badge-danger">Inactivo</span>
+                            </td>
+                            <td>
+                                <a class="btn btn-info btn-sm" th:href="@{/registered/{id}(id=${usuarioItem.id})}">Ver Perfil</a>
+                                <form th:action="@{/registered/{id}/toggle-activo(id=${usuarioItem.id})}" method="POST" style="display:inline;">
+                                    <button class="btn btn-warning btn-sm" type="submit" 
+                                        th:text="${usuarioItem.activo} ? 'Desactivar' : 'Activar'">
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        <a class="btn btn-link" th:href="@{/usuarios/{id}/tareas(id=${usuario.id})}">Volver a Mis Tareas</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="~{fragments::javascript}"></div>
+
+    </body>
+</html>

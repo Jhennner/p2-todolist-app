@@ -5,6 +5,7 @@ import todolist.dto.LoginData;
 import todolist.dto.RegistroData;
 import todolist.dto.UsuarioData;
 import todolist.service.UsuarioService;
+import todolist.service.UsuarioServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,12 +48,19 @@ public class LoginController {
 
             managerUserSession.logearUsuario(usuario.getId());
 
+            // Si es admin, redirigir a la lista de usuarios
+            if (usuarioService.isAdmin(usuario.getId())) {
+                return "redirect:/registered";
+            }
             return "redirect:/usuarios/" + usuario.getId() + "/tareas";
         } else if (loginStatus == UsuarioService.LoginStatus.USER_NOT_FOUND) {
             model.addAttribute("error", "No existe usuario");
             return "formLogin";
         } else if (loginStatus == UsuarioService.LoginStatus.ERROR_PASSWORD) {
             model.addAttribute("error", "Contraseña incorrecta");
+            return "formLogin";
+        } else if (loginStatus == UsuarioService.LoginStatus.USER_DISABLED) {
+            model.addAttribute("error", "Usuario desactivado. Contacta con el administrador");
             return "formLogin";
         }
         return "formLogin";
@@ -61,6 +69,7 @@ public class LoginController {
     @GetMapping("/registro")
     public String registroForm(Model model) {
         model.addAttribute("registroData", new RegistroData());
+        model.addAttribute("adminExists", usuarioService.existAdmin());
         return "formRegistro";
     }
 
@@ -82,8 +91,22 @@ public class LoginController {
         usuario.setPassword(registroData.getPassword());
         usuario.setFechaNacimiento(registroData.getFechaNacimiento());
         usuario.setNombre(registroData.getNombre());
+        usuario.setAdmin(registroData.getAdmin());
 
-        usuarioService.registrar(usuario);
+        try {
+            UsuarioData usuarioRegistrado = usuarioService.registrar(usuario);
+            
+            // Si es admin, hacer login automático y redirigir a lista de usuarios
+            if (usuarioRegistrado.getAdmin()) {
+                managerUserSession.logearUsuario(usuarioRegistrado.getId());
+                return "redirect:/registered";
+            }
+        } catch (UsuarioServiceException e) {
+            model.addAttribute("registroData", registroData);
+            model.addAttribute("error", e.getMessage());
+            return "formRegistro";
+        }
+
         return "redirect:/login";
    }
 
