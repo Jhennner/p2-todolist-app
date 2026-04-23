@@ -4,7 +4,7 @@
     <head th:replace="fragments :: head (titulo='Lista Tareas Pendientes')"></head>
     <body>
 
-        <nav th:replace="~{fragments :: menu}"></nav>
+        <nav th:replace="~{fragments::menu(${usuario})}"></nav>
         <div class="container-fluid">
 
             <div class="row mt-3">
@@ -53,7 +53,7 @@
 
         </div>
 
-        <div th:replace="fragments::javascript"/>
+        <div th:replace="~{fragments::javascript}"></div>
 
         <!-- Lanzamos una petición DELETE por JavaScript para borrar una tarea -->
 
