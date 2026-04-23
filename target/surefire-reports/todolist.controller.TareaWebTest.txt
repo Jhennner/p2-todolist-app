@@ -1,4 +1,28 @@
 -------------------------------------------------------------------------------
 Test set: todolist.controller.TareaWebTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.719 s - in todolist.controller.TareaWebTest
+Tests run: 5, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 4.919 s <<< FAILURE! - in todolist.controller.TareaWebTest
+deleteTareaDevuelveOKyBorraTarea  Time elapsed: 0.669 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.deleteTareaDevuelveOKyBorraTarea(TareaWebTest.java:167)
+Caused by: org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.deleteTareaDevuelveOKyBorraTarea(TareaWebTest.java:167)
+
+editarTareaActualizaLaTarea  Time elapsed: 0.063 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.editarTareaActualizaLaTarea(TareaWebTest.java:200)
+Caused by: org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.editarTareaActualizaLaTarea(TareaWebTest.java:200)
+
+listaTareas  Time elapsed: 0.03 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.listaTareas(TareaWebTest.java:83)
+Caused by: org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.listaTareas(TareaWebTest.java:83)
+
+postNuevaTareaDevuelveRedirectYAñadeTarea  Time elapsed: 0.058 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.postNuevaTareaDevuelveRedirectYAñadeTarea(TareaWebTest.java:139)
+Caused by: org.thymeleaf.exceptions.TemplateProcessingException: Cannot resolve fragment. Signature "menu (usuario)" declares parameters, but fragment selection did not specify any parameters. (template: "listaTareas" - line 7, col 14)
+	at todolist.controller.TareaWebTest.postNuevaTareaDevuelveRedirectYAñadeTarea(TareaWebTest.java:139)
+
