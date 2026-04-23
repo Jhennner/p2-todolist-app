@@ -81,6 +81,8 @@ public class TareaController {
 
         comprobarUsuarioLogeado(tarea.getUsuarioId());
 
+        UsuarioData user = usuarioService.findById(tarea.getUsuarioId());
+        model.addAttribute("usuario", user);
         model.addAttribute("tarea", tarea);
         tareaData.setTitulo(tarea.getTitulo());
         return "formEditarTarea";
