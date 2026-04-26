@@ -19,7 +19,7 @@ $ ./mvn clean package
 $  mvn clean package
 ```
 Una vez que la aplicación esté en funcionamiento, puedes abrirlo en tu navegador favorito y conectarte:
-- [http://localhost:8080/login](http://localhost:8080/login)
+- [http://localhost:8080/login](http://localhost:8080/login) o [http://localhost:8080](http://localhost:8080)
 
 ## Desarrollo
 ### Página About
@@ -212,3 +212,26 @@ Se agregó el estado `USER_DISABLED` para distinguir cuando un usuario está des
 public enum LoginStatus {LOGIN_OK, USER_NOT_FOUND, ERROR_PASSWORD, USER_DISABLED}
 ```
 
+## Enlaces y Recursos
+
+### Docker Hub
+
+La imagen Docker de esta aplicación está disponible en Docker Hub. Para descargarla e instalarla, ejecuta el siguiente comando:
+
+```bash
+docker pull jheneralbarado/p2-todolistapp:1.1.0
+```
+
+**Enlace al repositorio Docker Hub:** [https://hub.docker.com/repository/docker/jheneralbarado/p2-todolistapp/general]
+
+### GitHub Repository
+
+El código fuente del proyecto se encuentra alojado en el siguiente repositorio de GitHub:
+
+**Enlace al GitHub repositorio:** [https://github.com/Jhennner/p2-todolist-app]
+
+### Trello
+
+La gestión del proyecto y seguimiento de tareas se realiza mediante Trello:
+
+**Enlace al Trello Dashboard:** [https://trello.com/invite/b/69d8262499e8db938afcb315/ATTIf7b790b9eb130f8e4d5bad4697f34a4cAC1F64C8/e2-to-do-list-app]
